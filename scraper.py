@@ -24,7 +24,10 @@ def mainLoop():
         tqdmBar = tqdm(articles, desc="page " + str(FinnS.page))
         # Fetch text and count words.
         for (name, alink) in tqdmBar:
-            words = scrapePage('https://www.finn.no' +
+            finn = ''
+            if alink[0] != 'h':
+                finn = 'https://www.finn.no'
+            words = scrapePage(finn +
                                alink).lower().replace('\"', ' ').replace(',', ' ').replace('.', ' ').replace(':', ' ').replace(';', ' ').replace('!', ' ').replace('?', ' ').split()
             updateWords(words)
             # Can put 'break' to only load first article.TODO
